@@ -1,4 +1,3 @@
-name: stepQuest
 
 services:
   jenkins:
@@ -21,22 +20,23 @@ services:
     networks:
       - cicd-network
 
-  postgres-db:
-    image: bitnami/postgresql:latest
-    container_name: postgres-db
+  mariadb:
+    image: mariadb:latest
+    container_name: mariadb-db
     environment:
-      POSTGRES_USER: gaston
-      POSTGRES_PASSWORD: pallas
-      POSTGRES_DB: step_quest
+      MYSQL_ROOT_PASSWORD: pallas
+      MYSQL_DATABASE: step_quest
+      MYSQL_USER: gaston
+      MYSQL_PASSWORD: pallas
     ports:
-      - "5433:5432"
+      - "3307:3306"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - mariadb_data:/var/lib/mysql
     networks:
       - cicd-network
 
 volumes:
-  postgres_data:
+  mariadb_data:
 
 networks:
   cicd-network:
