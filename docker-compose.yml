@@ -1,7 +1,6 @@
-name : stepQuest
+name: stepQuest
 
-services : 
-
+services:
   jenkins:
     image: jenkins/jenkins:lts
     container_name: stepQuest-jenkins
@@ -11,7 +10,6 @@ services :
       - "8081:8080"
     networks:
       - cicd-network
-
 
   sonarqube:
     image: sonarqube:latest
@@ -23,6 +21,22 @@ services :
     networks:
       - cicd-network
 
+  postgres-db:
+    image: bitnami/postgresql:latest
+    container_name: postgres-db
+    environment:
+      POSTGRES_USER: gaston
+      POSTGRES_PASSWORD: pallas
+      POSTGRES_DB: step_quest
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - cicd-network
+
+volumes:
+  postgres_data:
 
 networks:
   cicd-network:
