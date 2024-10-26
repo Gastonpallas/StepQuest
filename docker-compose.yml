@@ -1,0 +1,29 @@
+name : stepQuest
+
+services : 
+
+  jenkins:
+    image: jenkins/jenkins:lts
+    container_name: stepQuest-jenkins
+    volumes:
+      - ./jenkins:/app/jenkins_home
+    ports:
+      - "8081:8080"
+    networks:
+      - cicd-network
+
+
+  sonarqube:
+    image: sonarqube:latest
+    container_name: stepQuest-sonarqube
+    ports:
+      - "9001:9000"
+    volumes:
+      - ./sonarqube:/app/sonarqube_home
+    networks:
+      - cicd-network
+
+
+networks:
+  cicd-network:
+    driver: bridge
