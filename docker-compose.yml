@@ -1,4 +1,3 @@
-
 services:
   jenkins:
     image: jenkins/jenkins:lts
@@ -24,10 +23,10 @@ services:
     image: mariadb:latest
     container_name: mariadb-db
     environment:
-      MYSQL_ROOT_PASSWORD: pallas
-      MYSQL_DATABASE: step_quest
-      MYSQL_USER: gaston
-      MYSQL_PASSWORD: pallas
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     ports:
       - "3307:3306"
     volumes:
