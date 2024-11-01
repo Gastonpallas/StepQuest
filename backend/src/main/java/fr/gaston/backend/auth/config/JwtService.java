@@ -18,13 +18,11 @@ import java.util.function.Function;
 @Service
 public class JwtService {
 
-    // Charger dotenv pour accéder au fichier .env
+    private static final String SK = "SECRET_KEY";
     private static final Dotenv dotenv = Dotenv.configure().ignoreIfMissing().load();
-
-    // Lire la clé SECRET_KEY depuis l'environnement ou .env
-    private static final String SECRET_KEY = System.getenv("SECRET_KEY") != null
-            ? System.getenv("SECRET_KEY")
-            : dotenv.get("SECRET_KEY");
+    private static final String SECRET_KEY = System.getenv(SK) != null
+            ? System.getenv(SK)
+            : dotenv.get(SK);
 
     public String extractUsername(String token) {
         return extracClaim(token, Claims::getSubject);
